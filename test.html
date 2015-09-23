@@ -3,6 +3,27 @@
 <head>
     <title ng-bind-template="Google Phone Gallery: {{query}}">Normal Title{{query}}</title>
     <meta charset="utf-8">
+    <style type="text/css">
+        .strike {
+            text-decoration: line-through;
+        }
+        .bold {
+            font-weight: bold;
+        }
+        .red {
+            color: red;
+        }
+
+        .base-class {
+            -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+            transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+        }
+
+        .base-class.my-class {
+            color: red;
+            font-size:3em;
+        }
+    </style>
     <!--<script src="js/angular-1.0.1.min.js" type="text/javascript"></script>-->
     <script src="js/angular.js" type="text/javascript"></script>
     <script src="js/angular-route.js" type="text/javascript"></script>

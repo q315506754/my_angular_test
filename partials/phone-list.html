@@ -1,3 +1,23 @@
+<p ng-class="{strike: deleted, bold: important, red: error}">Map Syntax Example</p>
+<input type="checkbox" ng-model="deleted"> deleted (apply "strike" class)<br>
+<input type="checkbox" ng-model="important"> important (apply "bold" class)<br>
+<input type="checkbox" ng-model="error"> error (apply "red" class)
+<hr>
+<p ng-class="style">Using String Syntax</p>
+<input type="text" ng-model="style" placeholder="Type: bold strike red">
+<hr>
+<p ng-class="[style1, style2, style3]">Using Array Syntax</p>
+<input ng-model="style1" placeholder="Type: bold, strike or red"><br>
+<input ng-model="style2" placeholder="Type: bold, strike or red"><br>
+<input ng-model="style3" placeholder="Type: bold, strike or red"><br>
+
+<input id="setbtn" type="button" value="set" ng-click="myVar='my-class'">
+<input id="clearbtn" type="button" value="clear" ng-click="myVar=''">
+<br>
+<span class="base-class" ng-class="myVar">Sample Text</span>
+<input type="button" value="clear" ng-click="clickSpn">
+clickSpn:{{clickSpn}}
+
 Your name: <input type="text" ng-model="yourname" placeholder="World">
 <hr>
 Hello {{yourname || 'World'}}!<br/>
@@ -20,11 +40,11 @@ Check me to check both: <input type="checkbox" ng-model="master"><br/>
 <p>Total number of phones: {{phones.length}}</p>
 
 <table>
-    <tr><td ng-repeat="i in [0, 1, 2, 3, 4, 5, 6, 7]">{{i}}</td></tr>
+    <tr><td ng-repeat="i in [0, 1, 2, 3, 4, 5, 6, 7]" ng-class-odd="'odd'" ng-class-even="'even'">{{i}}</td></tr>
 </table>
 
 <table>
-    <tr ><td ng-repeat="i in [0, 1, 2, 3, 4, 5, 6, 7]">{{i+1}}</td></tr>
+    <tr ><td ng-repeat="i in [0, 1, 2, 3, 4, 5, 6, 7]" ng-class-odd="'odd'" ng-class-even="'even'">{{i+1}}</td></tr>
 </table>
 <div>
     Search: <input ng-model="query">
