@@ -1,0 +1,20 @@
+[
+  {
+    "id":1,
+    "name": "Nexus S",
+    "imageUrl": "img/phones/motorola-defy-with-motoblur.0.jpg",
+    "snippet": "Fast just got faster with Nexus S."
+  },
+  {
+    "id":2,
+    "name": "Motorola XOOM™ with Wi-Fi",
+    "imageUrl": "img/phones/motorola-defy-with-motoblur.0.jpg",
+    "snippet": "The Next, Next Generation tablet."
+  },
+  {
+    "id":3,
+    "name": "MOTOROLA XOOM™",
+    "imageUrl": "img/phones/motorola-defy-with-motoblur.0.jpg",
+    "snippet": "The Next, Next Generation tablet."
+  }
+]

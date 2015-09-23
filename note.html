@@ -1,0 +1,48 @@
+<html ng-app="phonecat"></html>
+<title ng-bind-template="Google Phone Gallery: {{query}}">Normal Title{{query}}</title>
+<div ng-view></div>
+Your name: <input type="text" ng-model="yourname" placeholder="World">
+<li ng-repeat="phone in phones | filter:query| orderBy:orderProp">
+    {{phone.name}}
+    <a href="#/phones/{{phone.id}}" class="thumb"><img ng-src="{{phone.imageUrl}}"></a>
+    <p>{{phone.snippet}}</p>
+</li>
+{{phone.canXX| checkmark}}<br/>
+{{phone.canYY| checkmark}}<br/>
+{{"John" | sayHello}}<br/>
+{{'Gim' | sayHello}}<br/>
+{{ "lower cap string" | uppercase }}<br/>
+{{ {foo: "bar", baz: 23} | json }}<br/>
+{{ 1304375948024 | date }}<br/>
+{{ 1304375948024 | date:"MM/dd/yyyy @ h:mma" }}<br/>
+{{ 1304375948024 | date:"yyyy-MM-dd HH:mm:ss" }}<br/>
+<button ng-click="clear(this)" clear query</button>
+
+
+<script>
+angular.module('phonecat', ['phonecatFilters']).config(['$routeProvider', function ($routeProvider) {
+    $routeProvider.
+        when('/phones', {templateUrl: 'partials/phone-list.html', controller: PhoneListCtrl}).
+        when('/phones/:phoneId', {templateUrl: 'partials/phone-detail.html', controller: PhoneDetailCtrl}).
+        otherwise({redirectTo: '/phones'});
+}]);
+angular.module('phonecatFilters', []).filter('checkmark', function() {
+    return function(input) {
+        return input ? '\u2713' : '\u2718';
+    };
+});
+angular.module('custom', []).filter('sayHello', function() {
+    return function(input) {
+        return 'Hello '+input +'!';
+    };
+});
+
+function PhoneDetailCtrl($scope, $routeParams, $http) {
+    $scope.phoneId = $routeParams.phoneId;
+
+    $http.get('js/phoneDetail.json').success(function (data) {
+        $scope.phone = data;
+    });
+}
+</script>
+

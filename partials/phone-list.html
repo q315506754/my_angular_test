@@ -1,0 +1,50 @@
+Your name: <input type="text" ng-model="yourname" placeholder="World">
+<hr>
+Hello {{yourname || 'World'}}!<br/>
+Hello <span ng-bind="yourname">xcsdfsdds{{yourname}}</span>!<br/>
+Hello <span ng-bind-template="xxxxx {{yourname}} {{yourname}}">xcsdfsdds{{yourname}}</span>!<br/>
+Hello <span ng-bind-html="htmlText">xcsdfsdds{{yourname}}</span>!<br/>
+<input type="text" ng-model="htmlText" placeholder="World">
+<input type="text" ng-model="sdfsdfsd" placeholder="World" ng-blur="count = count + 1"  ng-change="count = count + 1">
+Check me to check both: <input type="checkbox" ng-model="master"><br/>
+<input id="checkSlave" type="checkbox" ng-checked="master">
+{{master}}
+<button ng-click="count = count + 1" ng-init="count=0">
+    Increment
+</button>
+<span>
+  count: {{count}}
+</span>
+
+{{phones | json}}
+<p>Total number of phones: {{phones.length}}</p>
+
+<table>
+    <tr><td ng-repeat="i in [0, 1, 2, 3, 4, 5, 6, 7]">{{i}}</td></tr>
+</table>
+
+<table>
+    <tr ><td ng-repeat="i in [0, 1, 2, 3, 4, 5, 6, 7]">{{i+1}}</td></tr>
+</table>
+<div>
+    Search: <input ng-model="query">
+    <button ng-click="clear(this)"> clear query</button>
+</div>
+Input:{{query}}
+Sort by:
+<select ng-model="orderProp">
+    <option value="name">Alphabetical</option>
+    <option value="age">Newest</option>
+</select>
+select:{{orderProp}}
+<div class="span10">
+    <!--Body content-->
+    <ul class="phones">
+        <li ng-repeat="phone in phones | filter:query| orderBy:orderProp">
+            {{phone.name}}
+            <a href="#/phones/{{phone.id}}" class="thumb"><img ng-src="{{phone.imageUrl}}"></a>
+            <p>{{phone.snippet}}</p>
+        </li>
+    </ul>
+</div>
+</div>
