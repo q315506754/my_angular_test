@@ -1,3 +1,494 @@
+<style type="text/css">
+    .my-messages {
+        transition:1s linear all;
+    }
+    .my-messages.ng-active {
+     /*messages are visible*/
+        font-size: 20px;
+        color: red;
+    }
+    .my-messages.ng-inactive {
+     /*messages are hidden*/
+        font-size: 10px;
+    }
+    .some-message {
+        transition:1s linear all;
+    }
+
+    .some-message.ng-enter {
+        font-size: 20px;
+        color: green;
+    }
+    .some-message.ng-enter.ng-enter-active {
+        color: yellow;
+    }
+
+    .some-message.ng-leave {
+        color: grey;
+    }
+    .some-message.ng-leave.ng-leave-active {
+        color: blue;
+    }
+</style>
+
+
+
+
+{{cookieName}}
+{{cookieStoreName}}
+
+<script type="text/ng-template" id="error-messages">
+    <div ng-message="required">Common-This field is required</div>
+    <div ng-message="minlength">Common-This field is too short</div>
+</script>
+<div ng-messages="myForm22.myField.$error" ng-messages-include="error-messages"></div>
+<hr/>
+
+<form name="myForm22" autocomplete="off">
+    <input type="text" ng-model="myFieldKK7" name="myField" required minlength="5" ng-maxlength="7" />
+    <div class="my-messages" ng-messages="myForm22.myField.$error" ng-messages-multiple ng-messages-include="error-messages">
+        <div ng-message="required" class="some-message">You did not enter a field</div>
+        <!--<div ng-message="minlength">The value entered is too short</div>-->
+        <div ng-message="maxlength" class="some-message">Your field is too long</div>
+    </div>
+    <input type="submit"/>
+</form>
+
+myForm22.myField.$error:{{myForm22.myField.$error}}<br/>
+myForm22.myField:{{myForm22.myField}}<br/>
+myFieldKK7.$error:{{myFieldKK7.$error}}<br/>
+myFieldKK7:{{myFieldKK7}}<br/>
+<pre>myForm22.myField.$error = {{ myForm22.myField.$error | json }}</pre><br/>
+<hr/>
+
+
+<div ng-init="filterNumber=123.456789"></div>
+No fractions: <span>{{filterNumber | number:0}}</span><br>
+Negative number: <span>{{-filterNumber | number:4}}</span>
+Positive number: <span>{{filterNumber | number:4}}</span>
+
+
+<div>
+    Limit {{numbers}} to: <input type="number" step="1" ng-model="numLimit">
+    <p>Output numbers: {{ numbers | limitTo:numLimit }}</p>
+    Limit {{letters}} to: <input type="number" step="1" ng-model="letterLimit">
+    <p>Output letters: {{ letters | limitTo:letterLimit }}</p>
+    Limit {{longNumber}} to: <input type="number" step="1" ng-model="longNumberLimit">
+    <p>Output long number: {{ longNumber | limitTo:longNumberLimit }}</p>
+</div>
+
+
+<pre id="default-spacing">{{ {'name':'value'} | json }}</pre>
+<pre id="custom-spacing">{{ {'name':'value'} | json:4 }}</pre>
+
+
+<input type="checkbox" ng-value="'aaaaa'" ng-model="cbx1" />
+{{cbx1}}
+
+<div ng-init="friends = [{name:'John', phone:'555-1276'},
+                         {name:'Mary', phone:'800-BIG-MARY'},
+                         {name:'Mike', phone:'555-4321'},
+                         {name:'Adam', phone:'555-5678'},
+                         {name:'Julie', phone:'555-8765'},
+                         {name:'Juliette', phone:'555-5678'}]"></div>
+Search custom: <input ng-model="searchTextCus">
+<input type="checkbox"  ng-model="cbxByRegex" />
+<!--<input type="text"  ng-model="regForCus" />-->
+
+<table >
+    <tr><th>Name</th><th>Phone</th></tr>
+    <tr ng-repeat="friend in friends | filter:searchTextCus:cusFilter">
+        <td>{{friend.name}}</td>
+        <td>{{friend.phone}}</td>
+    </tr>
+</table>
+<hr>
+
+Search: <input ng-model="searchText">
+<table id="searchTextResults">
+    <tr><th>Name</th><th>Phone</th></tr>
+    <tr ng-repeat="friend in friends | filter:searchText">
+        <td>{{friend.name}}</td>
+        <td>{{friend.phone}}</td>
+    </tr>
+</table>
+<hr>
+Any: <input ng-model="search.$"> <br>
+Name only <input ng-model="search.name"><br>
+Phone only <input ng-model="search.phone"><br>
+Equality <input type="checkbox" ng-model="strict"><br>
+<table id="searchObjResults">
+    <tr><th>Name</th><th>Phone</th></tr>
+    <tr ng-repeat="friendObj in friends | filter:search:strict">
+        <td>{{friendObj.name}}</td>
+        <td>{{friendObj.phone}}</td>
+    </tr>
+</table>
+
+
+<textarea
+        ng-model="txa"
+        ng-required="true"
+        ng-minlength="5"
+        ng-Trim="true"
+        >
+</textarea>
+
+{{txa}}
+
+<select ng-model="selection" ng-options="item for item in items">
+    <option></option>
+</select>
+<select ng-model="selection2" >
+    <option></option>
+    <option ng-repeat="item in items" value="{{$index}}">{{item}}</option>
+</select>
+<select ng-model="selection3" >
+    <option></option>
+    <option ng-repeat="item in templates" ng-value="item.bbc">{{item.nameXX}}</option>
+</select>
+<select ng-model="selection4" ng-options="item.bbc for item in templates">
+</select>
+<tt>selection={{selection}}</tt>
+<tt>selection={{selection2}}</tt>
+<tt>selection={{selection3}}</tt>
+<tt>selection={{selection4}}</tt>
+
+<script type="text/ng-template" id="/tpl.html">
+    Content of the template.{{ngtemplatesrc}}
+    console.log('ggg');
+</script>
+<input ng-model="ngtemplatesrc"> <br/>
+
+<a ng-click="currentTpl='/tpl.html'" id="tpl-link">Load inlined template</a>
+p1:
+<div ng-include src="currentTpl"></div>
+p2:
+<div ng-include="currentTpl"></div>
+p3:
+<div ng-include="'/tpl.html'"></div>
+<!--p4:-->
+<!--<div ng-include="/tpl.html"></div>-->
+<br/>
+<br/>
+<label ng-repeat="name in namesEx" for="{{name.c}}">
+    {{name.c}}:{{name.b}}
+    <input type="radio"
+           ng-model="my.favorite"
+           ng-value="name.b"
+           id="{{name.c}}"
+           name="favorite">
+</label>
+<div>You chose {{my.favorite}}</div>
+<!--value="{{name.b}}"-->
+
+
+
+<div >
+    <input ng-model="titlettt"> <br/>
+    <textarea ng-model="textttt"></textarea> <br/>
+    <pane title="{{titlettt}}">content:{{textttt}}</pane>
+</div>
+
+
+<div>
+    <select ng-model="selection" ng-options="item for item in items">
+    </select>
+    <tt>selection={{selection}}</tt>
+    <hr/>
+    <div class="animate-switch-container"
+         ng-switch on="selection">
+        <div class="animate-switch" ng-switch-when="settings">Settings Div</div>
+        <div class="animate-switch" ng-switch-when="home">Home Span</div>
+        <div class="animate-switch" ng-switch-default>default</div>
+        <div class="animate-switch" >no switch</div>
+    </div>
+    if:...
+    <div class="animate-switch-container">
+        <div class="animate-switch" ng-if="selection=='settings'">Settings Div</div>
+        <div class="animate-switch" ng-if="selection=='home'">Home Span</div>
+        <div class="animate-switch" ng-if="selection!='settings' && selection!='home'">default</div>
+        <div class="animate-switch" >no switch</div>
+    </div>
+</div>
+
+
+<form ng-submit="submit()">
+    Enter text and hit enter:
+    <input type="text" ng-model="formModel" name="text" />
+    <input type="submit" id="submit" value="Submit" />
+    <pre>list={{formModel}}</pre>
+</form>
+
+<input type="button" value="set color" ng-click="myStyle={color:'red'}">
+<input type="button" value="set background" ng-click="myStyle={'background-color':'blue'}">
+<input type="button" value="clear" ng-click="myStyle={}">
+<br/>
+<span ng-style="myStyle">Sample Text</span>
+<pre>myStyle={{myStyle}}</pre>
+
+
+Check me to select: <input type="checkbox" ng-model="ngselected"><br/>
+<select>
+    <option>Hello!</option>
+    <option>Hello1!</option>
+    <option>Hello2!</option>
+    <option>Hello3!</option>
+    <option id="greet" ng-selected="ngselected">Greetings!</option>
+</select>
+
+<table border="1">
+    <tr >
+        <td ng-repeat="item in [{aa:'111'},{aa:'22'}] track by $id(item)" ng-class-odd="'odd'" ng-class-even="'even'">
+            value:{{item}},{{item.$$hashKey}},{{item.$$nnn}}
+        </td>
+    </tr>
+</table>
+
+<input type="text" ng-model="rpEx"/>
+
+<table border="1">
+    <tr >
+        <td ng-repeat="i in [0, 1, 2, 3, 4, 5, 6, 7] |filter:rpEx as iAF" ng-class-odd="'odd'" ng-class-even="'even'">
+        value:{{i}} afterFiltered:{{iAF}}
+    </td>
+    </tr>
+</table>
+
+<header ng-repeat-start="item in ['aaa',111,'bbbb']">
+    Header {{ item }}
+</header>
+<div class="body">
+    Body {{ item }}
+</div>
+<footer ng-repeat-end>
+    Footer {{ item }}
+</footer>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>value</th>
+            <th>$index</th>
+            <th>$first</th>
+            <th>$middle</th>
+            <th>$last</th>
+            <th>$even</th>
+            <th>$odd</th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr  ng-repeat="i in ['aaaa','bbbb','cccc','ddd','eee','fff','gggg']" ng-class-odd="'odd'" ng-class-even="'even'">
+        <td >{{i}}</td>
+        <td >{{$index}}</td>
+        <td >{{$first}}</td>
+        <td >{{$middle}}</td>
+        <td >{{$last}}</td>
+        <td >{{$even}}</td>
+        <td >{{$odd}}</td>
+    </tr>
+    </tbody>
+</table>
+
+
+
+Check me to make text readonly: <input type="checkbox" ng-model="ngreadonly"><br/>
+<input type="text" ng-readonly="ngreadonly" value="I'm Angular"/>
+
+
+{{"John" | sayHello}}<br/>
+{{'Gim' | sayHello}}<br/>
+{{'Gim' | pluralize}}<br/>
+{{'1' | pluralize}}<br/>
+{{'2' | pluralize}}<br/>
+
+personCount:<input type="text" ng-model="personCount"><br/>
+<ng-pluralize count="personCount"
+              when="{'0': 'Nobody is viewing.',
+                     'one': '1 person is viewing.',
+                     '2': 'TWO person is viewing.',
+                     'other': '{} people are viewing.'}">
+    {{personCount}}
+
+</ng-pluralize>
+{{personCount}}
+
+aaa:<ng-pluralize count="personCount"
+                  when="{'0': 'Nobody is viewing.',
+                     'one': '1 person is viewing.',
+                     '2': 'TWO person is viewing.',
+                     'other': '{} people are viewing.'}">
+</ng-pluralize>
+<br/>
+
+offset:<ng-pluralize count="personCount" offset=2
+              when="{'0': 'Nobody is viewing.',
+                     '1': '{{person1}} is viewing.',
+                     '2': '{{person1}} and {{person2}} are viewing.',
+                     '50': '50 !! are viewing.',
+                     'one': '{{person1}}, {{person2}} and one other person are viewing.',
+                     'five': 'five',
+                     'fifty': 'fifty bingo',
+                     'other': '{{person1}}, {{person2}} and {} other people are viewing.'}">
+</ng-pluralize>
+
+<br/>
+Check me check multiple: <input type="checkbox" ng-model="ngopen"><br/>
+<details id="details" ng-open="ngopen">
+    <summary>Show/Hide me</summary>
+</details>
+
+
+<div>Normal: {{1 + 2}}</div>
+<div ng-non-bindable>Ignored: {{1 + 2}}</div>
+<br/>
+
+<button ng-mouseup="mucount = mucount + 1" ng-init="mucount=0">
+    Increment (on mouse up)
+</button>
+count: {{mucount}}
+
+<button ng-mouseover="mocount = mocount + 1" ng-init="mocount=0">
+    Increment (when mouse is over)
+</button>
+count: {{mocount}}
+
+<button ng-mousemove="mmcount = mmcount + 1" ng-init="mmcount=0">
+    Increment (when mouse moves)
+</button>
+count: {{mmcount}}
+
+<button ng-mouseleave="mlcount = mlcount + 1" ng-init="mlcount=0">
+    Increment (when mouse leaves)
+</button>
+count: {{mlcount}}
+
+
+
+<button ng-mouseenter="mecount = mecount + 1" ng-init="mecount=0">
+    Increment (when mouse enters)
+</button>
+count: {{mecount}}
+
+
+<button ng-mousedown="mdcount = mdcount + 1" ng-init="mdcount=0">
+    Increment (on mouse down)
+</button>
+count: {{mdcount}}
+
+<input type="text"
+       ng-model="userX.name"
+       ng-model-options="{ getterSetter: true }"/>
+
+<input type="text"
+       ng-model="userName"
+       ng-model-options="{ getterSetter: true,updateOn: 'blur' ,debounce: {'default': 500, 'blur': 1000}}" />
+
+<!--<pre>user.name = <span ng-bind="userX.name"></span></pre>-->
+<!--<pre>user.name = {{userX.name}}</span></pre>-->
+
+
+<pre>user.name = <span ng-bind="userX.name()"></span></pre>
+<pre>user.name = {{userX.name()}}</span></pre>
+
+<pre>user.name = <span ng-bind="userName"></span></pre>
+<pre>user.name = {{userName}}</span></pre>
+
+<form name="myForm">
+    List: <input name="namesInput" ng-model="names" ng-list="|||"required>
+ <span class="error" ng-show="myForm.namesInput.$error.required">
+   Required!</span>
+    <br>
+    <tt>names = {{names}}</tt><br/>
+    <tt>myForm.namesInput.$valid = {{myForm.namesInput.$valid}}</tt><br/>
+    <tt>myForm.namesInput.$error = {{myForm.namesInput.$error}}</tt><br/>
+    <tt>myForm.$valid = {{myForm.$valid}}</tt><br/>
+    <tt>myForm.$error.required = {{!!myForm.$error.required}}</tt><br/>
+    <div ng-repeat="idx in names">
+       <p>...{{idx}}...</p>
+    </div>
+</form>
+
+<p>Typing in the input box below updates the key count</p>
+<input ng-keyup="kucount = kucount + 1" ng-init="kucount=0"> key up count: {{kucount}}
+
+<p>Typing in the input box below updates the keycode</p>
+<input ng-keyup="event=$event">
+<p>event keyCode: {{ event.keyCode }}</p>
+<p>event altKey: {{ event.altKey }}</p>
+<div class="col-md-10"  ng-repeat="(key, value) in event">
+    <p>{{key}} = {{value}}</p>
+</div>
+
+<input ng-keypress="kpcount = kpcount + 1" ng-init="kpcount=0">
+key press count: {{kpcount}}
+
+<input ng-keydown="kdcount = kdcount + 1" ng-init="kdcount=0">
+key down count: {{kdcount}}
+
+    <select ng-model="template" ng-options="t.nameXX for t in templates">
+        <option value="">(blank)</option>
+    </select>
+    url of the template: <tt>{{template.url}}</tt>
+    <hr/>
+    <div class="slide-animate-container">
+        <div class="slide-animate" ng-include="template.url"></div>
+    </div>
+
+
+
+Click me: <input type="checkbox" ng-model="ngIfEg" ng-init="ngIfEg=true" /><br/>
+Show when checked:
+<span ng-if="ngIfEg" class="animate-if">
+  This is removed when the checkbox is unchecked.
+</span>
+
+<input ng-model="ngHrefVal" /><br />
+<a id="link-1" href ng-click="ngHrefVal = 1">link 1</a> (link, don't reload)<br />
+<a id="link-2" href="" ng-click="ngHrefVal = 2">link 2</a> (link, don't reload)<br />
+<a id="link-3" ng-href="/{{'123'}}">link 3</a> (link, reload! from no href to has href)<br />
+<a id="link-4" href="" name="xx" ng-click="ngHrefVal = 4">anchor</a> (link, don't reload)<br />
+<a id="link-5" name="xxx" ng-click="ngHrefVal = 5">anchor</a> (no link)<br />
+<a id="link-6" ng-href="{{ngHrefVal}}">link</a> (link, change location)
+<a id="link-7" href="http://www.gravatar.com/avatar/{{ngHrefVal}}">link 7</a> (link, reload)<br />
+
+
+<input type="checkbox" ng-model="whetherhide"><br/>
+<div ng-hide="whetherhide" >hahahahahahaha</div>
+<div ng-show="whetherhide" >hehehehehehe</div>
+
+<input type="text"  ng-model="focs" ng-focus="focs=focs+1"><br/>inc when focus:{{focs}}
+
+
+Click me to toggle: <input type="checkbox" ng-model="disab"><br/>
+<button ng-model="button" ng-disabled="disab" ng-cloak>Button</button>{{disab}}
+
+<div ng-init="scope = { isDisabled: false }">
+    <button disabled="{{scope.isDisabled}}" >Disabled</button>
+    <button ng-click="scope.isDisabled=!scope.isDisabled">change </button>{{scope.isDisabled}}
+</div>
+
+
+<button ng-dblclick="dblcount = dblcount + 1" ng-init="dblcount=0">
+    Increment (on double click)
+</button>
+count: {{dblcount}}
+
+
+    <div ng-repeat="innerList in list" ng-init="outerIndex = $index">
+        <div ng-repeat="value in innerList" ng-init="innerIndex = $index">
+            <span class="example-init">list[ {{outerIndex}} ][ {{innerIndex}} ] = {{value}};</span>
+        </div>
+    </div>
+
+
+<input ng-copy="copied=true" ng-init="copied=false; asdfg='copy me'" ng-model="asdfg">
+copied: {{copied}}
+<input ng-cut="cut=true" ng-init="cut=false; ffff='cut me'" ng-model="ffff">
+cut: {{cut}}
+<input ng-paste="paste=true" ng-init="paste=false" placeholder='paste here'>
+pasted: {{paste}}
+
 <p ng-class="{strike: deleted, bold: important, red: error}">Map Syntax Example</p>
 <input type="checkbox" ng-model="deleted"> deleted (apply "strike" class)<br>
 <input type="checkbox" ng-model="important"> important (apply "bold" class)<br>

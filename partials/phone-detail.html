@@ -7,8 +7,16 @@ TBD: detail view for {{phoneId}}<br/>
 
 {{ "lower cap string" | uppercase }}<br/>
 {{ {foo: "bar", baz: 23} | json }}<br/>
-{{ 1304375948024 | date }}<br/>
-{{ 1304375948024 | date:"MM/dd/yyyy @ h:mma" }}<br/>
-{{ 1304375948024 | date:"yyyy-MM-dd HH:mm:ss" }}<br/>
-
+{{ 1444900097000 | date }}<br/>
+{{ 1444900097000 | date:"MM/dd/yyyy @ h:mma" }}<br/>
+{{ 1444900097000 | date:"yyyy-MM-dd HH:mm:ss" }}<br/>
+{{ 1444900097000 | date:"yyyy-MM-dd H:mm:ss" }}<br/>
+{{ 1444900097000 | date:"yyyy-MM-dd hh:mm:ss" }}<br/>
+{{ 1444900097000 | date:"yyyy-MM-dd h:mm:ss" }}<br/>
+{{ "2011-01-01" | date:"yyyy-MM-dd h:mm:ss" }}<br/>
+timezone:{{ 1444900097000 | date:"yyyy-MM-dd h:mm:ss":"UTC" }}<br/>
+{{ 123456789.123456789 | currency : "USD$":3 }}<br/>
+{{ 123456789.123456789 | currency }}<br/>
+{{ 123456789.123456789 | currency : "hahahaha$%%":3 }}<br/>
+{{ 123456789.123456789 | currency : "":3 }}<br/>
 <input ng-model="userInput"> Uppercased: {{ userInput | uppercase }}
