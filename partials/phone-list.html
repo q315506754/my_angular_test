@@ -29,11 +29,135 @@
     .some-message.ng-leave.ng-leave-active {
         color: blue;
     }
+    .css-class-add, .css-class-remove {
+        -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+        -moz-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+        -o-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+        transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+    }
+
+    .css-class,
+    .css-class-add.css-class-add-active {
+        color: red;
+        font-size:3em;
+    }
+
+    .css-class-remove.css-class-remove-active {
+        font-size:1.0em;
+        color:black;
+    }
+</style>
+
+
+<div ng-init="ddfgg=true"></div>
+<p>
+    <input type="button" value="set" ng-click="myCssVar='css-class'">
+    <input type="button" value="clear" ng-click="myCssVar=''">
+    <br>
+    <span ng-class="myCssVar">CSS-Animated Text</span>
+</p>
+
+
+<span my-draggable>Drag ME</span>
+
+<div ng-controller="transcludeThreeController">
+    <transclude-three-direct>Check out the contents, {{name}}!</transclude-three-direct>
+</div>
+
+
+<div ng-controller="transcludeTwoController">
+    <transclude-two-direct>Check out the contents, {{name}}!</transclude-two-direct>
+</div>
+
+<div ng-controller="transcludeController">
+    <transclude-direct>bbbbbbbbbbb gggggggg Check out the contents, {{name}}!</transclude-direct>
+</div>
+
+
+<div ng-controller="myCustomerController">
+    <div my-customer>aaaaaaaaaaaaaaaa</div>
+</div>
+
+
+<div contentEditable="true" ng-model="content" title="Click to edit">Some</div>
+<pre>model = {{content}}</pre>
+
+<style type="text/css">
+    div[contentEditable] {
+        cursor: pointer;
+        background-color: #D0D0D0;
+    }
 </style>
 
 
 
 
+<div ng-controller="FilterCusController">
+    Input: <input ng-model="greeting" type="text"><br>
+    Decoration: <input ng-model="decoration.symbol" type="text"><br>
+    No filter: {{greeting}}<br>
+    Decorated: {{greeting | decorate}}<br>
+</div>
+
+
+<div>
+    <input ng-init="messageGua='gua'" ng-model="messageGua" >
+    <p>{{::messageGua}}</p>
+    <p>{{messageGua}}</p>
+</div>
+
+<div ng-controller="EventController">
+    Root scope <tt>MyEvent</tt> count: {{count}}
+    <ul>
+        <li ng-repeat="i in [1]" ng-controller="EventController">
+            <button ng-click="$emit('MyEvent')">$emit('MyEvent')</button>
+            <button ng-click="$broadcast('MyEvent')">$broadcast('MyEvent')</button>
+            <br>
+            Middle scope <tt>MyEvent</tt> count: {{count}}
+            <ul>
+                <li ng-repeat="item in [1, 2]" ng-controller="EventController">
+                    Leaf scope <tt>MyEvent</tt> count: {{count}}
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div  ng-controller="CreateServiceController">
+    <p>Let's try this simple notify service, injected into the controller...</p>
+    <input ng-init="message='test'" ng-model="message" >
+    <button ng-click="callNotify(message);">NOTIFY</button>
+    <p>(you have to click 3 times to see an alert)</p>
+</div>
+
+
+<div class="spicy">
+    <div ng-controller="MainController">
+        <p>Good {{timeOfDay}}, {{name}}!</p>
+
+        <div ng-controller="ChildController">
+            <p>Good {{timeOfDay}}, {{name}}!</p>
+
+            <div ng-controller="GrandChildController">
+                <p>Good {{timeOfDay}}, {{name}}!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{$location.absUrl}}
+
+<div  ng-swipe-left="swipeleft=swipeleft+1" ng-swipe-right="swiperight=swiperight+1">
+    Some list content, like an email in the inbox
+</div>
+swipeleft:{{swipeleft}} swiperight:{{swiperight}}
+<br/>
+
+{{snippetLink | linky}}
+<br/>
+<div ng-bind-html="snippetLink | linky"></div>
+<br/>
+<div ng-bind-html="'http://www.baidu.com' | linky:'_blank'"></div>
 {{cookieName}}
 {{cookieStoreName}}
 
@@ -222,7 +346,11 @@ p3:
 
 <input type="button" value="set color" ng-click="myStyle={color:'red'}">
 <input type="button" value="set background" ng-click="myStyle={'background-color':'blue'}">
-<input type="button" value="clear" ng-click="myStyle={}">
+<input type="button" value="clear" ng-cli                        $scope.voucherLogList = data.results;
+
+
+
+       ck="myStyle={}">
 <br/>
 <span ng-style="myStyle">Sample Text</span>
 <pre>myStyle={{myStyle}}</pre>
@@ -439,7 +567,7 @@ key down count: {{kdcount}}
 
 Click me: <input type="checkbox" ng-model="ngIfEg" ng-init="ngIfEg=true" /><br/>
 Show when checked:
-<span ng-if="ngIfEg" class="animate-if">
+<span ng-if="ngIfEg" class="animate-if">+
   This is removed when the checkbox is unchecked.
 </span>
 
