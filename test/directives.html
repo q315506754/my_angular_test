@@ -1,0 +1,67 @@
+<div ng-controller="DirectiveController">
+    <div my-customer></div>
+    <my-customer></my-customer>
+
+    <div my-customer2></div>
+
+    <div my-customer3 type="name"></div>
+    <div my-customer3 type="address"></div>
+</div>
+
+<hr/>
+<div my-customer></div>
+<my-customer></my-customer>
+<hr/>
+
+<div ng-controller="DirectiveController2">
+    <div my-customer></div>
+    <my-customer></my-customer>
+
+    <div my-customer2></div>
+
+    <div my-customer3 type="name"></div>
+    <div my-customer3 type="address"></div>
+</div>
+<hr/>
+
+<div ng-controller="DirectiveController3">
+    <my-customer4 info="naomi"></my-customer4><br/>
+    <my-customer4 info="igor"></my-customer4><br/>
+    <my-customer4 info="igorxx"></my-customer4><br/>
+</div>
+<hr/>
+
+<div ng-controller="DirectiveController4">
+    Date format: <input ng-model="format"> <br/>
+    Current time is: <span my-current-time="format"></span>
+</div>
+<hr/>
+
+<div ng-controller="DirectiveController5">
+    <my-customer5 >Check out the contents, {{name}}!</my-customer5><br/>
+</div>
+<hr/>
+
+<div ng-controller="DirectiveController6">
+    <my-customer6 ng-hide="dialogIsHidden" on-close="hideDialog()">
+        Check out the contents, {{name}}!
+    </my-customer6>
+</div>
+<hr/>
+
+
+<span my-draggable>Drag ME</span>
+<hr/>
+
+<my-tabs>
+    <my-pane title="Hello">
+        <h4>Hello</h4>
+        <p>Lorem ipsum dolor sit amet selected:{{pane.selected}}</p>
+    </my-pane>
+    <my-pane title="World">
+        <h4>World</h4>
+        <em>Mauris elementum elementum enim at suscipit.selected:{{selected}}</em>
+        <p><a href ng-click="i = i + 1">counter: {{i || 0}}</a></p>
+    </my-pane>
+</my-tabs>
+<hr/>

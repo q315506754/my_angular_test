@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="myTest">
+<head >
+    <meta charset="UTF-8">
+    <title>test</title>
+
+    <script src="js/angular.js" type="text/javascript"></script>
+    <script src="js/angular-route.js" type="text/javascript"></script>
+    <script src="js/angular-sanitize.js" type="text/javascript"></script>
+    <script src="js/angular-messages.js" type="text/javascript"></script>
+    <script src="js/angular-cookies.js" type="text/javascript"></script>
+    <script src="js/angular-touch.js" type="text/javascript"></script>
+
+    <script src="js/module/home.js" type="text/javascript"></script>
+    <script src="js/module/controller.js" type="text/javascript"></script>
+    <script src="js/module/service.js" type="text/javascript"></script>
+    <script src="js/module/directives.js" type="text/javascript"></script>
+</head>
+<script>
+    var rootModule = angular.module('myTest', ['directivesModule','homeModule','controllerModule','serviceModule','ngTouch','ngCookies','ngMessages','ngRoute','ngSanitize']).config(['$routeProvider', function ($routeProvider) {
+        $routeProvider.
+                when('/home', {templateUrl: 'test/home.html', controller: "HomeCtrl"}).
+                when('/controller', {templateUrl: 'test/controller.html', controller: "InvoiceController"}).
+                when('/directives', {templateUrl: 'test/directives.html', controller: "DirectiveController"}).
+//                when('/phones/:phoneId', {templateUrl: 'partials/phone-detail.html', controller: PhoneDetailCtrl}).
+                otherwise({redirectTo: '/home'});
+
+
+    }]);
+
+</script>
+<body>
+<a href="#/home">home</a>
+<a href="#/controller">controller</a>
+<a href="#/directives">directives</a>
+<div ng-view ></div>
+
+</body>
+</html>
